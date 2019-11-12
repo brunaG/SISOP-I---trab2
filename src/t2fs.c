@@ -4,8 +4,66 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "../include/t2fs.h"
 #include "../include/apidisk.h"
+#include "../include/t2disk.h"
+#include "../include/bitmap2.h"
+
+void carrega_superbloco();
+
+
+struct t2fs_superbloco *superBlock;
+
+void carrega_superbloco(){
+
+     superBlock = malloc(sizeof(struct t2fs_superbloco));
+
+    char buffer[SECTOR_SIZE];
+    if (read_sector(0, buffer) != 0)
+        return;
+
+    int index = 0;
+    // id
+    strcpy(superBlock->id, buffer);
+    superBlock->id[4] = 0;
+    index += 4;
+
+    //version
+    superBlock->version = buffer[index] | buffer[index+1] << 8;
+    index += 2;
+
+    //superblockSize
+    superBlock->superblockSize = buffer[index] | buffer[index+1] << 8;
+    index += 2;
+
+    //freeBlocksBitmapSize
+    superBlock->freeBlocksBitmapSize = buffer[index] | buffer[index+1] << 8;
+    index += 2;
+
+    //freeInodeBitmapSize
+    superBlock->freeInodeBitmapSize = buffer[index] | buffer[index+1] << 8;
+    index += 2;
+
+    //inodeAreaSize
+    superBlock->inodeAreaSize = buffer[index] | buffer[index+1] << 8;
+    index += 2;
+
+    //blockSize
+    superBlock->blockSize = buffer[index] | buffer[index+1] << 8;
+    index += 2;
+
+    //diskSize -  quantidade total de blocos na particao
+    superBlock->diskSize = buffer[index] | buffer[index+1] << 8| buffer[index+2] << 16 | buffer[index+3] << 24;
+    index += 4;
+
+    //Checksum*
+
+
+
+}
+
+
 
 /*-----------------------------------------------------------------------------
 Função:	Informa a identificação dos desenvolvedores do T2FS.
