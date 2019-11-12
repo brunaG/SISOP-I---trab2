@@ -1,14 +1,18 @@
 
 /**
 */
-#include "t2fs.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "../include/t2fs.h"
+#include "../include/apidisk.h"
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	Informa a identificaÃ§Ã£o dos desenvolvedores do T2FS.
+Função:	Informa a identificação dos desenvolvedores do T2FS.
 -----------------------------------------------------------------------------*/
 int identify2 (char *name, int size) {
 	char *name_group = "Bruna Gonzaga - 00252743\nLuma Beserra - CODIGO AQUI\0";
-	if(size < strlen(group)){
+	if(size < strlen(name_group)){
 		printf("espao nao suficiente!\n");
 		return -1;
 	}
@@ -16,62 +20,62 @@ int identify2 (char *name, int size) {
 }
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	Formata logicamente uma partiÃ§Ã£o do disco virtual t2fs_disk.dat para o sistema de
-		arquivos T2FS definido usando blocos de dados de tamanho 
-		corresponde a um mÃºltiplo de setores dados por sectors_per_block.
+Função:	Formata logicamente uma partição do disco virtual t2fs_disk.dat para o sistema de
+		arquivos T2FS definido usando blocos de dados de tamanho
+		corresponde a um múltiplo de setores dados por sectors_per_block.
 -----------------------------------------------------------------------------*/
 int format2(int partition, int sectors_per_block) {
 	return -1;
 }
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	Monta a partiÃ§Ã£o indicada por "partition" no diretÃ³rio raiz
+Função:	Monta a partição indicada por "partition" no diretório raiz
 -----------------------------------------------------------------------------*/
 int mount(int partition) {
 	return -1;
 }
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	Desmonta a partiÃ§Ã£o atualmente montada, liberando o ponto de montagem.
+Função:	Desmonta a partição atualmente montada, liberando o ponto de montagem.
 -----------------------------------------------------------------------------*/
 int unmount(void) {
 	return -1;
 }
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	FunÃ§Ã£o usada para criar um novo arquivo no disco e abrÃ­-lo,
-		sendo, nesse Ãºltimo aspecto, equivalente a funÃ§Ã£o open2.
-		No entanto, diferentemente da open2, se filename referenciar um 
-		arquivo jÃ¡ existente, o mesmo terÃ¡ seu conteÃºdo removido e 
-		assumirÃ¡ um tamanho de zero bytes.
+Função:	Função usada para criar um novo arquivo no disco e abrí-lo,
+		sendo, nesse último aspecto, equivalente a função open2.
+		No entanto, diferentemente da open2, se filename referenciar um
+		arquivo já existente, o mesmo terá seu conteúdo removido e
+		assumirá um tamanho de zero bytes.
 -----------------------------------------------------------------------------*/
 FILE2 create2 (char *filename) {
 	return -1;
 }
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	FunÃ§Ã£o usada para remover (apagar) um arquivo do disco. 
+Função:	Função usada para remover (apagar) um arquivo do disco.
 -----------------------------------------------------------------------------*/
 int delete2 (char *filename) {
 	return -1;
 }
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	FunÃ§Ã£o que abre um arquivo existente no disco.
+Função:	Função que abre um arquivo existente no disco.
 -----------------------------------------------------------------------------*/
 FILE2 open2 (char *filename) {
 	return -1;
 }
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	FunÃ§Ã£o usada para fechar um arquivo.
+Função:	Função usada para fechar um arquivo.
 -----------------------------------------------------------------------------*/
 int close2 (FILE2 handle) {
 	return -1;
 }
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	FunÃ§Ã£o usada para realizar a leitura de uma certa quantidade
+Função:	Função usada para realizar a leitura de uma certa quantidade
 		de bytes (size) de um arquivo.
 -----------------------------------------------------------------------------*/
 int read2 (FILE2 handle, char *buffer, int size) {
@@ -79,7 +83,7 @@ int read2 (FILE2 handle, char *buffer, int size) {
 }
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	FunÃ§Ã£o usada para realizar a escrita de uma certa quantidade
+Função:	Função usada para realizar a escrita de uma certa quantidade
 		de bytes (size) de  um arquivo.
 -----------------------------------------------------------------------------*/
 int write2 (FILE2 handle, char *buffer, int size) {
@@ -87,35 +91,35 @@ int write2 (FILE2 handle, char *buffer, int size) {
 }
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	FunÃ§Ã£o que abre um diretÃ³rio existente no disco.
+Função:	Função que abre um diretório existente no disco.
 -----------------------------------------------------------------------------*/
 DIR2 opendir2 (char *pathname) {
 	return -1;
 }
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	FunÃ§Ã£o usada para ler as entradas de um diretÃ³rio.
+Função:	Função usada para ler as entradas de um diretório.
 -----------------------------------------------------------------------------*/
 int readdir2 (DIR2 handle, DIRENT2 *dentry) {
 	return -1;
 }
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	FunÃ§Ã£o usada para fechar um diretÃ³rio.
+Função:	Função usada para fechar um diretório.
 -----------------------------------------------------------------------------*/
 int closedir2 (DIR2 handle) {
 	return -1;
 }
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	FunÃ§Ã£o usada para criar um caminho alternativo (softlink)
+Função:	Função usada para criar um caminho alternativo (softlink)
 -----------------------------------------------------------------------------*/
 int sln2 (char *linkname, char *filename) {
 	return -1;
 }
 
 /*-----------------------------------------------------------------------------
-FunÃ§Ã£o:	FunÃ§Ã£o usada para criar um caminho alternativo (hardlink)
+Função:	Função usada para criar um caminho alternativo (hardlink)
 -----------------------------------------------------------------------------*/
 int hln2(char *linkname, char *filename) {
 	return -1;

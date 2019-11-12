@@ -14,7 +14,8 @@ typedef unsigned int DWORD;
 
 /** Registro com as informações da entrada de diretório, lida com readdir2 */
 #define MAX_FILE_NAME_SIZE 255
-typedef struct {
+typedef struct
+{
     char    name[MAX_FILE_NAME_SIZE+1]; /* Nome do arquivo cuja entrada foi lida do disco      */
     BYTE    fileType;                   /* Tipo do arquivo: regular (0x01) ou diretório (0x02) */
     DWORD   fileSize;                   /* Numero de bytes do arquivo                          */
@@ -163,7 +164,7 @@ int write2 (FILE2 handle, char *buffer, int size);
 
 /*-----------------------------------------------------------------------------
 Função:	Abre o diretório raiz da partição ativa.
-		Se a operação foi realizada com sucesso, 
+		Se a operação foi realizada com sucesso,
 		a função deve posicionar o ponteiro de entradas (current entry) na primeira posição válida do diretório.
 
 Entra:	-
