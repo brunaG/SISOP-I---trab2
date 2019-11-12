@@ -1,0 +1,34 @@
+//POSSIVEIS AUXILIARES
+
+
+int inicializa_estruturas();
+void carrega_superbloco();
+
+int isOpen(int handler);
+int getFreeOpenIndex();
+
+int carrega_entrada(struct t2fs_record* record, unsigned int bloco, unsigned int offset);
+int salva_entrada(struct t2fs_record record, unsigned int bloco);
+int salva_diretorio(struct t2fs_record diretorio, unsigned int bloco);
+
+int loadFile(char* filename, struct t2fs_record* file);
+int loadBottomFolder(char* filename, struct t2fs_record* file);
+int getSectorFor(struct t2fs_record record, int offset);
+int writeBlockTo(struct t2fs_record* record, int block);
+int freeLastBlock(struct t2fs_record* record);
+int freeBlocksUntil(int offset, struct t2fs_record* record);
+int readFromFile(struct t2fs_record record, int initialOffset, int size, char *buffer);
+int writeToFile(struct t2fs_record* record, int initialOffset, int size, char *buffer);
+
+int cleanFolderPathName(char* filename, char* cleanedFilename);
+int searchDir(struct t2fs_record dir, char* name, struct t2fs_record *file);
+int getNameOfDir(struct t2fs_record dir, char* buffer, int size);
+
+struct t2fs_superbloco *superBlock;
+struct t2fs_record *root, *workingDir;
+
+int handlerCounter = 0;
+FILE2 abertosHandler[MAXOPEN];
+struct t2fs_record abertosRecord[MAXOPEN];
+int abertosDirBlock[MAXOPEN];
+int abertosPointer[MAXOPEN];
