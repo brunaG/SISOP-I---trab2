@@ -10,8 +10,12 @@
 #include "../include/t2disk.h"
 #include "../include/bitmap2.h"
 
-void carrega_superbloco();
+#DEFINE SUCSESS 0
+#DEFINE ERROR -1
 
+bool started = false;
+void carrega_superbloco();
+void inicializador();
 
 struct t2fs_superbloco *superBlock;
 
@@ -63,15 +67,23 @@ void carrega_superbloco(){
 
 }
 
-
+void inicializador(){
+    if (!started)
+    {
+        carrega_superbloco();
+        started = true;
+        //inicializaLista
+        //muda status abertos
+    }
+}
 
 /*-----------------------------------------------------------------------------
 Função:	Informa a identificação dos desenvolvedores do T2FS.
 -----------------------------------------------------------------------------*/
 int identify2 (char *name, int size) {
-	char *name_group = "Bruna Gonzaga - 00252743\nLuma Beserra - CODIGO AQUI\0";
+	char *name_group = "Bruna Gonzaga - 00252743\nLuma Beserra - 00268612\0";
 	if(size < strlen(name_group)){
-		printf("espao nao suficiente!\n");
+		printf("espaço nao suficiente!\n");
 		return -1;
 	}
 	strncpy(name, name_group, strlen(name_group)+1);
