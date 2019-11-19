@@ -13,11 +13,17 @@
 #define SUCSESS 0
 #define ERROR -1
 
+typedef struct {
+    FILE2 file;
+    int vago;
+} ARQUIVO;
+
 boolean started = false;
 void carrega_superbloco();
 void inicializador();
-
+boolean estaVago();
 struct t2fs_superbloco *superBlock;
+ARQUIVO arquivos[50];
 
 void carrega_superbloco(){
 
@@ -62,8 +68,7 @@ void carrega_superbloco(){
     index += 4;
 
     //Checksum*
-
-
+	//(DWORD)buffer[10] + (DWORD)buffer[11] * 256 + (DWORD)buffer[12] * 65536 + (DWORD)buffer[13] * 16777216;
 
 }
 
@@ -73,8 +78,32 @@ void inicializador(){
         carrega_superbloco();
         started = true;
         //inicializaLista
-        //muda status abertos
+		
+        for (i = 0; i < 50; i++) {
+            arquivos[i].vago = ERRO;
+        }
     }
+}
+
+boolean estaVago() {
+    int count = 0;
+	
+    for (int i = 0; i < 50; i++) {
+        if (arquivos[i].vago == ERRO) {
+            count++;
+        }
+    }
+
+	if (count > 0){
+		return false;
+	}
+	
+    return true;
+}
+
+boolean validaCaminho(char caminho[]) {
+	//tratar esse método
+    return true;
 }
 
 /*-----------------------------------------------------------------------------
@@ -120,7 +149,17 @@ Função:	Função usada para criar um novo arquivo no disco e abrí-lo,
 		assumirá um tamanho de zero bytes.
 -----------------------------------------------------------------------------*/
 FILE2 create2 (char *filename) {
-	return -1;
+	char filename2[200];
+
+    strcpy(filename2, filename);
+
+    initLib();
+
+    if (estaVago() && validaCaminho(filename2) && fileExists(filename2, &regR, &regM, &regAvo) == MISSING_FILE) {
+		
+	}
+	
+	return ERROR;
 }
 
 /*-----------------------------------------------------------------------------
