@@ -10,10 +10,10 @@
 #include "../include/t2disk.h"
 #include "../include/bitmap2.h"
 
-#DEFINE SUCSESS 0
-#DEFINE ERROR -1
+#define SUCSESS 0
+#define ERROR -1
 
-bool started = false;
+boolean started = false;
 void carrega_superbloco();
 void inicializador();
 

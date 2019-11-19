@@ -5,7 +5,7 @@
 
 
 typedef int FILE2;
-
+typedef int DIR2;
 typedef unsigned char BYTE;
 typedef unsigned short int WORD;
 typedef unsigned int DWORD;
@@ -172,7 +172,7 @@ Entra:	-
 Saída:	Se a operação foi realizada com sucesso, a função retorna "0" (zero).
 		Em caso de erro, será retornado um valor diferente de zero.
 -----------------------------------------------------------------------------*/
-int opendir2 (void);
+int opendir2 (char *pathname);
 
 
 /*-----------------------------------------------------------------------------
@@ -189,7 +189,7 @@ Entra:	dentry -> estrutura de dados onde a função coloca as informações da entra
 Saída:	Se a operação foi realizada com sucesso, a função retorna "0" (zero).
 		Em caso de erro, será retornado um valor diferente de zero ( e "dentry" não será válido)
 -----------------------------------------------------------------------------*/
-int readdir2 (DIRENT2 *dentry);
+int readdir2 (DIR2 handle, DIRENT2 *dentry);
 
 
 /*-----------------------------------------------------------------------------
@@ -200,7 +200,7 @@ Entra:	-
 Saída:	Se a operação foi realizada com sucesso, a função retorna "0" (zero).
 		Em caso de erro, será retornado um valor diferente de zero.
 -----------------------------------------------------------------------------*/
-int closedir2 (void);
+int closedir2 (DIR2 handle);
 
 
 /*-----------------------------------------------------------------------------
