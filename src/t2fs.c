@@ -18,12 +18,19 @@ typedef struct {
     int vago;
 } ARQUIVO;
 
+typedef struct {
+    void *dados;
+    struct nodoLista *ant;
+    struct nodoLista *prox;
+}LISTA;
+
 boolean started = false;
 void carrega_superbloco();
 void inicializador();
 boolean estaVago();
 struct t2fs_superbloco *superBlock;
 ARQUIVO arquivos[50];
+LISTA diretorios;
 
 void carrega_superbloco(){
 
@@ -73,15 +80,11 @@ void carrega_superbloco(){
 }
 
 void inicializador(){
-    if (!started)
-    {
-        carrega_superbloco();
-        started = true;
-        //inicializaLista
-
-        for (i = 0; i < 50; i++) {
-            arquivos[i].vago = ERRO;
-        }
+    carrega_superbloco();
+    started = true;
+    diretorios = NULL;
+    for (i = 0; i < 50; i++) {
+        arquivos[i].vago = ERRO;
     }
 }
 
@@ -153,7 +156,10 @@ FILE2 create2 (char *filename) {
 
     strcpy(filename2, filename);
 
-    initLib();
+	if (!started){
+        inicializador();
+    }
+    
 
     if (estaVago() && validaCaminho(filename2) && fileExists(filename2, &regR, &regM, &regAvo) == MISSING_FILE) {
 
@@ -166,6 +172,11 @@ FILE2 create2 (char *filename) {
 Função:	Função usada para remover (apagar) um arquivo do disco.
 -----------------------------------------------------------------------------*/
 int delete2 (char *filename) {
+	
+	if (!started){
+        inicializador();
+    }
+	
 	return -1;
 }
 
@@ -173,6 +184,11 @@ int delete2 (char *filename) {
 Função:	Função que abre um arquivo existente no disco.
 -----------------------------------------------------------------------------*/
 FILE2 open2 (char *filename) {
+	
+	if (!started){
+        inicializador();
+    }
+	
 	return -1;
 }
 
@@ -188,6 +204,11 @@ Função:	Função usada para realizar a leitura de uma certa quantidade
 		de bytes (size) de um arquivo.
 -----------------------------------------------------------------------------*/
 int read2 (FILE2 handle, char *buffer, int size) {
+	
+	if (!started){
+        inicializador();
+    }
+	
 	return -1;
 }
 
@@ -196,6 +217,11 @@ Função:	Função usada para realizar a escrita de uma certa quantidade
 		de bytes (size) de  um arquivo.
 -----------------------------------------------------------------------------*/
 int write2 (FILE2 handle, char *buffer, int size) {
+	
+	if (!started){
+        inicializador();
+    }
+	
 	return -1;
 }
 
@@ -203,6 +229,11 @@ int write2 (FILE2 handle, char *buffer, int size) {
 Função:	Função que abre um diretório existente no disco.
 -----------------------------------------------------------------------------*/
 DIR2 opendir2 (char *pathname) {
+	
+	if (!started){
+        inicializador();
+    }
+	
 	return -1;
 }
 
@@ -210,6 +241,11 @@ DIR2 opendir2 (char *pathname) {
 Função:	Função usada para ler as entradas de um diretório.
 -----------------------------------------------------------------------------*/
 int readdir2 (DIR2 handle, DIRENT2 *dentry) {
+	
+	if (!started){
+        inicializador();
+    }
+	
 	return -1;
 }
 
@@ -217,7 +253,37 @@ int readdir2 (DIR2 handle, DIRENT2 *dentry) {
 Função:	Função usada para fechar um diretório.
 -----------------------------------------------------------------------------*/
 int closedir2 (DIR2 handle) {
-	return -1;
+	
+	if (!started){
+        inicializador();
+    }
+	
+    /* if (diretoriosAbertos == NULL) {
+        return ERROR;
+    } 
+	else {
+        while (diretoriosAbertos->prox != NULL) {
+            if (((ODIN *)diretoriosAbertos->dados)->handle == handle) {
+                diretoriosAbertos = removeLista(diretoriosAbertos, i);
+                diretoriosAbertos = getFirstNodeLista(diretoriosAbertos);
+                return OK;
+            } else {
+                diretoriosAbertos = diretoriosAbertos->prox;
+                i++;
+            }
+        }
+		
+        if (((ODIN *)diretoriosAbertos->dados)->handle == handle) {
+            diretoriosAbertos = removeLista(diretoriosAbertos, i);
+            diretoriosAbertos = getFirstNodeLista(diretoriosAbertos);
+            return OK;
+        }
+		
+		diretoriosAbertos = getFirstNodeLista(diretoriosAbertos);
+        return ERROR;
+    } */
+	
+	return ERROR;
 }
 
 /*-----------------------------------------------------------------------------
