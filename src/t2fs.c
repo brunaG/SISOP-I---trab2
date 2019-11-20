@@ -78,7 +78,7 @@ void inicializador(){
         carrega_superbloco();
         started = true;
         //inicializaLista
-		
+
         for (i = 0; i < 50; i++) {
             arquivos[i].vago = ERRO;
         }
@@ -87,7 +87,7 @@ void inicializador(){
 
 boolean estaVago() {
     int count = 0;
-	
+
     for (int i = 0; i < 50; i++) {
         if (arquivos[i].vago == ERRO) {
             count++;
@@ -97,7 +97,7 @@ boolean estaVago() {
 	if (count > 0){
 		return false;
 	}
-	
+
     return true;
 }
 
@@ -156,9 +156,9 @@ FILE2 create2 (char *filename) {
     initLib();
 
     if (estaVago() && validaCaminho(filename2) && fileExists(filename2, &regR, &regM, &regAvo) == MISSING_FILE) {
-		
+
 	}
-	
+
 	return ERROR;
 }
 
@@ -224,14 +224,23 @@ int closedir2 (DIR2 handle) {
 Função:	Função usada para criar um caminho alternativo (softlink)
 -----------------------------------------------------------------------------*/
 int sln2 (char *linkname, char *filename) {
-	return -1;
+
+    int slink;
+    slink = symlink(filename,linkname);
+    if (slink == -1);
+	return ERROR;
+
 }
 
 /*-----------------------------------------------------------------------------
 Função:	Função usada para criar um caminho alternativo (hardlink)
 -----------------------------------------------------------------------------*/
 int hln2(char *linkname, char *filename) {
-	return -1;
+
+    int hlink;
+    hlink = link(filename,linkname);
+    if (hlink == -1);
+        return ERROR;
 }
 
 
