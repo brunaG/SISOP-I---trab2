@@ -80,19 +80,19 @@ void carrega_superbloco(){
 }
 
 void inicializador(){
+    int i;
     carrega_superbloco();
     started = true;
-    diretorios = NULL;
     for (i = 0; i < 50; i++) {
-        arquivos[i].vago = ERRO;
+        arquivos[i].vago = ERROR;
     }
 }
 
 boolean estaVago() {
-    int count = 0;
+    int i, count = 0;
 
-    for (int i = 0; i < 50; i++) {
-        if (arquivos[i].vago == ERRO) {
+    for (i = 0; i < 50; i++) {
+        if (arquivos[i].vago == ERROR) {
             count++;
         }
     }
@@ -159,9 +159,10 @@ FILE2 create2 (char *filename) {
 	if (!started){
         inicializador();
     }
-    
 
-    if (estaVago() && validaCaminho(filename2) && fileExists(filename2, &regR, &regM, &regAvo) == MISSING_FILE) {
+    //&& fileExists(filename2, &regR, &regM, &regAvo) == MISSING_FILE
+
+    if (estaVago() && validaCaminho(filename2)) {
 
 	}
 
@@ -172,11 +173,11 @@ FILE2 create2 (char *filename) {
 Função:	Função usada para remover (apagar) um arquivo do disco.
 -----------------------------------------------------------------------------*/
 int delete2 (char *filename) {
-	
+
 	if (!started){
         inicializador();
     }
-	
+
 	return -1;
 }
 
@@ -184,11 +185,11 @@ int delete2 (char *filename) {
 Função:	Função que abre um arquivo existente no disco.
 -----------------------------------------------------------------------------*/
 FILE2 open2 (char *filename) {
-	
+
 	if (!started){
         inicializador();
     }
-	
+
 	return -1;
 }
 
@@ -204,11 +205,11 @@ Função:	Função usada para realizar a leitura de uma certa quantidade
 		de bytes (size) de um arquivo.
 -----------------------------------------------------------------------------*/
 int read2 (FILE2 handle, char *buffer, int size) {
-	
+
 	if (!started){
         inicializador();
     }
-	
+
 	return -1;
 }
 
@@ -217,11 +218,11 @@ Função:	Função usada para realizar a escrita de uma certa quantidade
 		de bytes (size) de  um arquivo.
 -----------------------------------------------------------------------------*/
 int write2 (FILE2 handle, char *buffer, int size) {
-	
+
 	if (!started){
         inicializador();
     }
-	
+
 	return -1;
 }
 
@@ -229,11 +230,11 @@ int write2 (FILE2 handle, char *buffer, int size) {
 Função:	Função que abre um diretório existente no disco.
 -----------------------------------------------------------------------------*/
 DIR2 opendir2 (char *pathname) {
-	
+
 	if (!started){
         inicializador();
     }
-	
+
 	return -1;
 }
 
@@ -241,11 +242,11 @@ DIR2 opendir2 (char *pathname) {
 Função:	Função usada para ler as entradas de um diretório.
 -----------------------------------------------------------------------------*/
 int readdir2 (DIR2 handle, DIRENT2 *dentry) {
-	
+
 	if (!started){
         inicializador();
     }
-	
+
 	return -1;
 }
 
@@ -253,14 +254,14 @@ int readdir2 (DIR2 handle, DIRENT2 *dentry) {
 Função:	Função usada para fechar um diretório.
 -----------------------------------------------------------------------------*/
 int closedir2 (DIR2 handle) {
-	
+
 	if (!started){
         inicializador();
     }
-	
+
     /* if (diretoriosAbertos == NULL) {
         return ERROR;
-    } 
+    }
 	else {
         while (diretoriosAbertos->prox != NULL) {
             if (((ODIN *)diretoriosAbertos->dados)->handle == handle) {
@@ -272,17 +273,17 @@ int closedir2 (DIR2 handle) {
                 i++;
             }
         }
-		
+
         if (((ODIN *)diretoriosAbertos->dados)->handle == handle) {
             diretoriosAbertos = removeLista(diretoriosAbertos, i);
             diretoriosAbertos = getFirstNodeLista(diretoriosAbertos);
             return OK;
         }
-		
+
 		diretoriosAbertos = getFirstNodeLista(diretoriosAbertos);
         return ERROR;
     } */
-	
+
 	return ERROR;
 }
 
